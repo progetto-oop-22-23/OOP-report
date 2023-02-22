@@ -1,3 +1,10 @@
 @startuml
 
+interface Controller {}
+interface Device {}
+interface Dashboard {}
+
+Controller -- Device
+Controller -- Dashboard
+
 @enduml
