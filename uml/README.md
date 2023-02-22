@@ -1,5 +1,11 @@
 # UML
 
+## PlantUML Syntax
+
+<https://plantuml.com/commons>
+
+<https://plantuml.com/class-diagram>
+
 ## PlantUML Installation
 
 Debian-based
