@@ -1,0 +1,25 @@
+@startuml
+
+interface Controller {
+    + addDevice()
+    + getDevices(): List<Device>
+}
+
+interface Device {
+    + getID()
+    + getType()
+    + setState()
+    + getState()
+}
+
+interface HomeEnvironment {
+    + setTemp()
+    + getTemp()
+    + setAirQuality()
+    + getAirQuality()
+}
+
+Controller -- Device
+Device -- HomeEnvironment
+
+@enduml
