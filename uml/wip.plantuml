@@ -1,0 +1,51 @@
+@startuml
+
+interface Controller {
+	+ addDevice(Device<?>)
+	+ getDevices(): List<DeviceGUI>
+}
+
+interface Device<S> {
+	+ getInfo(): DeviceInfo
+	+ getState(): DeviceState<S>
+}
+
+interface DeviceInfo {
+	+ getID(): DeviceID
+	+ getType(): DeviceType
+	' + getID(): Supplier<Long>
+	' + getType(): Supplier<String>
+}
+
+interface DeviceID {
+	+ get(): long
+}
+
+interface DeviceType {
+	+ get(): String
+}
+
+interface DeviceState<S> {
+	+ get(): S
+}
+
+interface DeviceGUI {
+
+}
+
+interface ControllableDevice extends Device {
+	+ setState(DeviceState)
+}
+
+interface View {}
+
+Controller -- Device
+Device -- DeviceInfo
+DeviceInfo -- DeviceID
+DeviceInfo -- DeviceType
+Device -- DeviceState
+Controller -- DeviceGUI
+Controller -- View
+View -- DeviceGUI
+
+@enduml

@@ -1,0 +1,119 @@
+@startuml
+
+/' MODEL '/
+
+interface Controller {
+	+ connectDevice(Device<?>)
+	+ getDevices(): Set<DeviceView<?>>
+	+ updateDevice(DeviceView<?>)
+}
+
+class ControllerImpl implements Controller {
+	- Set<Device<?>> devices
+	- Map<Device<?>, DeviceView<?>> devToView
+	- Map<DeviceView<?>, Device<?>> viewToDev
+	- toggleDevice(ToggleableDevice)
+	- adjustDevice(AdjustableDevice, newState)
+	- updateTick()
+}
+
+interface Device<S extends DeviceState> {
+	+ getInfo(): DeviceInfo
+	+ getState(): S
+}
+
+interface ToggleableDevice implements Device {
+	+ isOn()
+	+ toggle()
+}
+
+interface AdjustableDevice implements Device {
+	+ getValue()
+	+ setValue()
+	+ getMinValue()
+	+ getMaxValue()
+}
+
+interface DeviceInfo {
+	+ getID(): long
+	+ getType(): String
+}
+
+abstract class DeviceState {}
+
+class LockState extends DeviceState {
+	+ isOn()
+	+ lock()
+	+ unlock()
+}
+
+class TempState extends DeviceState {
+	+ getCelsius()
+}
+
+class AirQualityState extends DeviceState {
+	+ getCO2()
+	+ getPM10()
+	+ getPM25()
+	+ getToxPct()
+}
+
+class Lock implements ToggleableDevice {
+	+ getState(): LockState
+	+ isLocked(): boolean
+	+ lock()
+	+ unlock()
+}
+
+class Thermometer implements Device {}
+
+class Window implements AdjustableDevice {
+	+ getState(): WindowState
+	+ isClosed()
+	+ isOpen()
+	+ setOpen(byte) eg.0-100
+}
+note right of Window::setOpen
+eg. 0 to 100
+end note
+
+/' VIEW '/
+
+interface DeviceView {
+
+}
+
+abstract class ToggleableDeviceView implements DeviceView {}
+abstract class AdjustableDeviceView implements DeviceView {}
+
+abstract class DeviceViewImpl implements DeviceView {
+	- id
+	- type
+	- jsonState?
+}
+
+interface View {}
+
+/' LINKS '/
+
+Controller -- Device: connection
+Device -> DeviceInfo: uses
+Controller -> DeviceView: uses
+Controller -- View: interaction
+View -> DeviceView: uses
+
+'LockState -* Device
+'TempState -* Device
+'AirQualityState -* Device
+DeviceState -* Device
+
+interface HomeEnvironment {
+	+ setTemp()
+	+ getTemp()
+	+ setAirQuality()
+	+ getAirQuality()
+}
+
+HomeEnvironment -- Device: interaction
+
+@enduml
