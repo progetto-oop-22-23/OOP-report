@@ -47,7 +47,7 @@ class LockState extends DeviceState {
 	+ unlock()
 }
 
-class TempState extends DeviceState {
+class TemperatureState extends DeviceState {
 	+ getCelsius()
 }
 
