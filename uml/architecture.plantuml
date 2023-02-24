@@ -1,0 +1,16 @@
+@startuml
+
+interface Controller {
+    + getDevices(): List<Device>
+}
+interface Device {
+    + getID()
+    + getType()
+    + getState()
+}
+interface Dashboard {}
+
+Controller -- Device
+Controller -- Dashboard
+
+@enduml

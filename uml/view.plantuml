@@ -1,0 +1,28 @@
+@startuml
+
+class Dashboard {	
+}
+
+class Controller {
+	- deviceToView: HashMap<Device, DeviceGUI>
+	- viewToDevice: HashMap<DeviceGUI, Device>
+	+ updateLoop()
+	' controller con observer aggiorna la view
+	/' {
+		deviceToView.get(light).set(off);
+	} '/	
+}
+
+class DeviceGUIImpl {
+	- state: boolean
+	- id: long
+	+ set(boolean)
+}
+
+class Device {
+}
+
+Controller -- View
+Controller -- Device
+
+@enduml
