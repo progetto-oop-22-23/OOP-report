@@ -1,23 +1,39 @@
 @startuml
 
+left to right direction
+
 interface Controller {
-    + addDevice()
-    + getDevices(): List<Device>
+    + addDevice(Device)
+    + getDevices(): List<DeviceGUI>
+    - setDeviceState(DeviceID, DeviceState)
+    - getDeviceState(DeviceID): DeviceState
+    ' + addToggleableDevice()
+    ' + addAdjustableDevice()
+    ' + addSensorDevice()
+	+ updateDevice(DeviceGUI dev): void
+	/'
+		newState = dev.getState();
+		viewToDevice.get(dev.getID())
+					.setState(newState);
+	'/
 }
 
 interface Device {
-    + getID()
-    + getType()
-    + setState()
-    + getState()
+    + getID(): DeviceID
+    + getType(DeviceType)
+    + setState(DeviceState)
+    + getState(): DeviceState
 }
 
 interface HomeEnvironment {
-    + setTemp()
-    + getTemp()
-    + setAirQuality()
-    + getAirQuality()
+    + setTemp(Temperature)
+    + getTemp(): Temperature
+    + setAirQuality(AirQuality)
+    + getAirQuality(): AirQuality
 }
+
+interface Temperature extends Supplier
+interface AirQuality extends Supplier
 
 Controller -- Device
 Device -- HomeEnvironment

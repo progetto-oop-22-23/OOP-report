@@ -1,7 +1,13 @@
 @startuml
 
-interface Controller {}
-interface Device {}
+interface Controller {
+    + getDevices(): List<Device>
+}
+interface Device {
+    + getID()
+    + getType()
+    + getState()
+}
 interface Dashboard {}
 
 Controller -- Device
