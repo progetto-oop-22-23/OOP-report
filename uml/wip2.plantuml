@@ -2,6 +2,12 @@
 
 /' MODEL '/
 
+interface SimManager {
+	+ updateTick()
+	+ setTime()
+	+ getTime()
+}
+
 interface Controller {
 	+ connectDevice(Device<?>)
 	+ getDevices(): Set<DeviceView<?>>
@@ -95,6 +101,9 @@ abstract class DeviceViewImpl implements DeviceView {
 interface View {}
 
 /' LINKS '/
+
+SimManager -> Controller: updates
+SimManager -> HomeEnvironment: updates
 
 Controller -- Device: connection
 Device -> DeviceInfo: uses
