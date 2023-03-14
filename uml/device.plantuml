@@ -1,17 +1,19 @@
 @startuml
 
-interface Device {
-    + getID(): ? / long
-    + getType(): ? / String / DeviceType
-    + getState(): ?
+interface Device<T> {
+    + getInfo(): DeviceInfo
+    + getState(): T
 }
 
-interface SettableDevice extends Device {
-    + setState(?)
+interface ToggleableDevice<T> extends Device {
+	+ isToggled(): Boolean
+	+ toggle(): void
 }
 
-abstract SensorDevice implements Device {}
-abstract ToggleableDevice implements SettableDevice {}
-abstract AdjustableDevice implements SettableDevice {}
+interface AdjustableDevice<T> extends Device {
+	+ setState(T)
+	+ getMinValue(): T
+	+ getMaxValue(): T
+}
 
 @enduml
