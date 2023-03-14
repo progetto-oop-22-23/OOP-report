@@ -1,0 +1,23 @@
+@startuml
+
+interface Scheduler<T> {
+	+ addSchedule(Schedule)
+	+ getSchedules(): Set<Schedule<T>>
+	+ removeSchedule(?)
+	+ checkSchedule(time, param)
+}
+
+class TemperatureScheduler<Temperature> implements Scheduler {}
+
+interface Schedule {
+	+ checkSchedule(time, param)
+}
+
+class ScheduleImpl<T> implements Schedule {
+	// - timeConstraints: Set<Predicate<LocalTime>>
+	// - paramConstraints: Set<Predicate<T>>
+	- constraints: Set<Pair<Predicate<LocalTime>, Predicate<T>>>
+	- commands: Set<BiConsumer<T>>
+}
+
+@enduml
