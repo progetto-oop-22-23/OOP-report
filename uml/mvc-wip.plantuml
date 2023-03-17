@@ -1,0 +1,45 @@
+@startuml
+
+interface Controller {
+  + getDeviceManager(): DeviceManager
+  + getScheduler()
+  + getLogger()
+  + getViewManager(): ViewManager
+}
+
+interface ViewManager {
+    + addView(?)
+    + removeView(?)
+    + updateAll()
+}
+
+interface DeviceManager implements DeviceManagerObserver {
+
+}
+
+interface DeviceManagerObserver {
+    + connectDevice(?)
+    + disconnectDevice(uuid)
+    + getConnectedDevices(): DeviceView ? 
+    + getConnectableDevices(): ?
+
+    + signalDevice(?)
+    + toggleDevice(?) ?
+    + setAdjustableDevice(?) ?
+}
+
+interface DeviceManagerView {
+    setObserver(DeviceManagerObserver)
+}
+
+class DeviceManagerImpl implements DeviceManagerView {
+    setObserver(DeviceManagerObserver)
+}
+
+DeviceManagerImpl -* DeviceManagerObserver
+Controller -* DeviceManager
+Controller -* ViewManager
+Controller -* Scheduler
+Controller -* Logger
+
+@enduml
