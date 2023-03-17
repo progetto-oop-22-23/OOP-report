@@ -9,7 +9,8 @@ interface SimManager {
 }
 
 interface Controller {
-	+ connectDevice(Device<?>)
+	+ connectDevice(Device<?>): DeviceId
+	+ disconnectDevice(DeviceId): DeviceId
 	+ getDevices(): Set<DeviceView<?>>
 	+ updateDevice(DeviceView<?>)
 }
