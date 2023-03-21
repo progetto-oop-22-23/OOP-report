@@ -2,8 +2,8 @@
 
 interface Scheduler<T> {
 	+ addSchedule(Schedule<T>)
-	+ getSchedules(): Set<Schedule<T>>
 	+ removeSchedule(?)
+	+ getSchedules(): Set<Schedule<T>>
 	+ checkSchedule(time, param)
 }
 
