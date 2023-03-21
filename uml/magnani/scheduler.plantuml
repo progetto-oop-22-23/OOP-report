@@ -28,7 +28,7 @@ interface Schedule {
 class ScheduleImpl<T> implements Schedule {
 	' // - timeConstraints: Set<Predicate<LocalTime>>
 	' // - paramConstraints: Set<Predicate<T>>
-	- constraints: Set<Pair<Predicate<LocalTime>, Predicate<T>>>
+	- constraints: Set<Pair<Predicate<LocalTime>, Bounds<T>>>
 	- commands: Set<BiConsumer<T>>
 }
 
