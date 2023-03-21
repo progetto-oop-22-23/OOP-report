@@ -1,5 +1,9 @@
 @startuml
 
+interface SchedulerCommand {
+	+ execute(): void
+}
+
 interface Scheduler<T> {
 	+ addSchedule(Schedule<T>)
 	+ removeSchedule(?)
@@ -7,7 +11,15 @@ interface Scheduler<T> {
 	+ checkSchedule(time, param)
 }
 
-class TemperatureScheduler<Temperature> implements Scheduler {}
+interface TemperatureCommands {
+	+ SchedulerCommand doHeat()
+	+ SchedulerCommand stopAll()
+	+ SchedulerCommand doCool()
+}
+
+class TemperatureScheduler<Temperature> implements Scheduler {
+	+ TemperatureScheduler(TemperatureCommands)
+}
 
 interface Schedule {
 	+ checkSchedule(time, param)
