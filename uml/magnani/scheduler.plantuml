@@ -1,4 +1,4 @@
-@startuml
+@startuml scheduler
 
 interface SchedulerCommand {
 	+ execute(): void
@@ -8,7 +8,7 @@ interface Scheduler<T> {
 	+ addSchedule(Schedule<T>)
 	+ removeSchedule(?)
 	+ getSchedules(): Set<Schedule<T>>
-	+ checkSchedule(time, param)
+	+ checkSchedule(LocalDateTime, T)
 }
 
 interface TemperatureCommands {
@@ -21,15 +21,13 @@ class TemperatureScheduler<Temperature> implements Scheduler {
 	+ TemperatureScheduler(TemperatureCommands)
 }
 
-interface Schedule {
-	+ checkSchedule(time, param)
+interface Schedule<T> {
+	+ checkSchedule(LocalDateTime, T)
 }
 
 class ScheduleImpl<T> implements Schedule {
-	' // - timeConstraints: Set<Predicate<LocalTime>>
-	' // - paramConstraints: Set<Predicate<T>>
-	- constraints: Set<Pair<Predicate<LocalTime>, Bounds<T>>>
-	- commands: Set<BiConsumer<T>>
+	' - constraints: Set<Pair<Predicate<LocalTime>, Bounds<T>>>
+	- constraints: Set<Pair<Bounds<LocalTime>, Bounds<T>>>
 }
 
 @enduml
