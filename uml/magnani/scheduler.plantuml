@@ -4,10 +4,10 @@ interface SchedulerCommand {
 	+ execute(): void
 }
 
-interface Scheduler<T> {
-	+ addSchedule(Schedule<T>)
-	+ removeSchedule(?)
-	+ getSchedules(): Set<Schedule<T>>
+interface TimeScheduler<T> {
+	+ addSchedule(TimeSchedule<T>)
+	+ removeSchedule(UUID)
+	+ getSchedules(): Map<UUID, TimeSchedule<T>>
 	+ checkSchedule(LocalDateTime, T)
 }
 
@@ -17,17 +17,17 @@ interface TemperatureCommands {
 	+ SchedulerCommand doCool()
 }
 
-class TemperatureScheduler<Temperature> implements Scheduler {
+class TemperatureScheduler<Temperature> implements TimeScheduler {
 	+ TemperatureScheduler(TemperatureCommands)
 }
 
-interface Schedule<T> {
-	+ checkSchedule(LocalDateTime, T)
+interface TimeSchedule<T> {
+	+ getTimeRange(): Bounds<LocalTime>
+	+ getParamRange(): Bounds<T>
 }
 
-class ScheduleImpl<T> implements Schedule {
-	' - constraints: Set<Pair<Predicate<LocalTime>, Bounds<T>>>
-	- constraints: Set<Pair<Bounds<LocalTime>, Bounds<T>>>
+class TimeScheduleImpl<T> implements TimeSchedule {
+	- constraints: Pair<Bounds<LocalTime>, Bounds<T>>
 }
 
 @enduml
