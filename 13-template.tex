@@ -28,7 +28,6 @@
 \tableofcontents
 
 \chapter{Analysis}
-
 \section{Requirements}
 
 HOMER (HOMe EmulatoR) is an emulated domotic controller connected to lights, windows, and other domestic facilities.
@@ -47,9 +46,10 @@ The smart environment is mananged through a dashboard which allows the user to c
 
 \subsubsection{Non-Functional Requirements}
 \begin{itemize}
-	\item Should be reasonably performant to run on a desktop/laptop.
-	\item Should meet minimal security requirements for user recognition.
+	\item Should performant enough to run on a desktop/laptop.
 	\item Should be smart enough to consistenly manage the whole house-system.  
+	\item User interface should be intuitive and user-friendly
+	\item The project should be portable, and work on Windows, MacOS and Linux devices.
 \end{itemize}
 
 \section{Analysis and domain model}
@@ -59,7 +59,7 @@ Smart devices are common domestic devices as lights, electrical outlets, windows
 for monitoring indoor temperature and air quality along with electrical absorption.
 The user will interact with the devices via the controller through a dashboard.
 
-The main difficulty will be implementing a communication protocol for the controller and the devices, which can vary in functioning and technical aspects. 
+The main challenge will be modelling the communication between the controller and the different devices, which can vary in functioning.
 
 \begin{figure}[H]
 \centering{}
@@ -71,9 +71,14 @@ The main difficulty will be implementing a communication protocol for the contro
 \chapter{Design}
 \section{Architecture}
 
-HOMER follows the MVC pattern. This is because we want to clearly seperate the application's business 
+HOMER uses the MVC pattern. This is because we want to clearly seperate the application's business 
 logic from the view, and make our software as modular as possibile. Our main building block is the Device interface, 
-and every device will be responsible for its own behaviour.
+and each device will be responsible for its own behaviour. The communication between the view and each device 
+is heavily inspired by REST applications, but we decided to let each device implement its own state. This respects the 
+single responsibilty principle. This is also more explicit, allowing each device to define its own fields.
+The controller is divided in two subsections, a ViewManager and a DeviceManager, marking the fact that we want our view 
+and model to be as orthogonal as possible.
+
 
 \section{Detailed Design}
 
@@ -270,7 +275,12 @@ Si ricorda che l'impegno deve giustificare circa 40-50 ore di sviluppo (è norma
 	\item Uso superficiale del DVCS.
 \end{itemize}
 
-\section{Note di sviluppo}
+\section{Development notes}
+The first step in our process was domain analysis, and then the insights gained were applied by modeling 
+the project's main interfaces by using UML. 
+We used Git as our DCVS. We used gitflow and feature branching, with dev as our development branch,
+and main as our stable branch for releases. The workflow is based on pull requests and forks, allowing for asynchronous feedback when needed.
+Group meeting were only needed to discuss refactors. 
 
 Questa sezione, come quella riguardante il design dettagliato va svolta \textbf{singolarmente da ogni membro del gruppo}.
 %
