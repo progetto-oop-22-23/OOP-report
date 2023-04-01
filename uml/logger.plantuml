@@ -1,0 +1,17 @@
+@startuml
+
+interface Logger {
+
+void setOutputStream(OutputStream outputStream);
+
+void updateDeviceState(DeviceId deviceId, DeviceState deviceState);
+
+void removeDevice(DeviceId deviceId);
+
+void start(Controller controller);
+
+void log(String string);
+    
+}
+
+@enduml
