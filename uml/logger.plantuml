@@ -2,36 +2,36 @@
 
 interface Logger {
 
-void setOutputStream(OutputStream outputStream);
+    + void setOutputStream(OutputStream outputStream);
 
-void updateDeviceState(DeviceId deviceId, DeviceState deviceState);
-
-void removeDevice(DeviceId deviceId);
-
-void start(Controller controller);
-
-void log(String string);
-    
+    + void log(String string);
 }
 
-@enduml
-interface View() {
-    void update()
+interface DeviceViewer {
+    + void updateDeviceState(DeviceId deviceId, DeviceState deviceState);
+
+    + void removeDevice(DeviceId deviceId);
+
+    + void start(Controller controller);
+
 }
 
-class Logger implements View {
-    void setLoggingLevel(LoggingLevel)
-    void setOutputStream(OutputStream)
-    void update()
+
+class LoggerImpl {
+    + LoggerImpl(OutputStream outputStream)
 }
 
-class Controller {
-	- deviceToView: HashMap<Device, DeviceGUI>
-	- viewToDevice: HashMap<DeviceGUI, Device>
-	+ updateLoop()
-    void addView(View)
-    void removeView(View)
+class TimeStampLogger {
+    TimeStampLogger(Logger logger, Clock clock)
 }
 
-Controller -- Logger
+class WarningLogger {
+    public WarningLogger(Logger logger)
+}
+
+Logger --|> DeviceViewer
+LoggerImpl --|> Logger
+WarningLogger --|> Logger
+TimeStampLogger --|> Logger
+
 @enduml

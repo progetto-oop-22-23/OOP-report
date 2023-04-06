@@ -101,7 +101,8 @@ for example we might want to log timestamps first, and add some verbose warnings
 or vice versa.
 We also want to be able to do this dynamically. We want to favour composition over inheritance, in order to make code simpler.
 Solution: used the Decorator design pattern, which allows to wrap dynamically objects at runtime,
-and overload their functionalities. It also allows for wrapping, and takes away the problems of inheritance.
+and overload their functionalities. It also allows for wrapping, and takes away the problems of inheritance. \newline
+\includegraphics[width=16cm]{uml/logger.png}
 
 \textbf{Air conditioning and Heating}\newline
 Problem: In HOMER, air conditioning and heating devices basically do the same thing, but with a small difference. As long as they are
