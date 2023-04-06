@@ -5,10 +5,7 @@ interface SchedulerCommand {
 }
 
 interface TimeScheduler<T> {
-	+ addSchedule(TimeSchedule<T>)
-	+ removeSchedule(UUID)
-	+ getSchedules(): Map<UUID, TimeSchedule<T>>
-	+ checkSchedule(LocalDateTime, T)
+
 }
 
 interface TemperatureCommands {
@@ -21,13 +18,9 @@ class TemperatureScheduler<Temperature> implements TimeScheduler {
 	+ TemperatureScheduler(TemperatureCommands)
 }
 
-interface TimeSchedule<T> {
-	+ getTimeRange(): Bounds<LocalTime>
-	+ getParamRange(): Bounds<T>
-}
-
-class TimeScheduleImpl<T> implements TimeSchedule {
-	- constraints: Pair<Bounds<LocalTime>, Bounds<T>>
+class TimeSchedule<T> {
+	+ timeRange(): Bounds<LocalTime>
+	+ paramRange(): Bounds<T>
 }
 
 @enduml
