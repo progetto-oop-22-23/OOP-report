@@ -38,7 +38,7 @@ Some devices should act in a somewhat random way (but still predictable), while 
 \subsubsection{Functional Requirements}
 
 \begin{itemize}
-	\item The software should allow creating and controlling a lot of devices, such as:
+	\item The software should allow creating and controlling lots of different devices, such as:
 	\begin{itemize}
 		\item Lights
 		\item Electrical outlets
@@ -46,8 +46,10 @@ Some devices should act in a somewhat random way (but still predictable), while 
 		\item Temperature changer devices
 		\item Air quality sensors
 	\end{itemize}
-	\item The software needs to be interactive, in order to see the effects of removing/adding certain types of devies on the simulated envrionment
-	\item The software also needs a logger in order to allow users (and possibly machines) to keep track of state changes.
+	\item Devices can be added/removed at runtime.
+	\item A logger is needed in order to allow users (and possibly machines) to keep track of state changes.
+	\item The software should have graph views for temperature and air quality state.
+	\item The users should be able to see electrical consumption.
 \end{itemize}
 
 \subsubsection{Non-Functional Requirements}
@@ -78,13 +80,11 @@ and the different devices, which can have very different states.
 \chapter{Design}
 \section{Architecture}
 
-HOMER uses the MVC pattern. This is because we want to clearly seperate the application's business 
-logic from the view, and make our software as modular as possibile. Our main building block is the Device interface, 
-and each device will be responsible for its own behaviour. The communication between the view and each device 
-is heavily inspired by REST applications, but we decided to let each device implement its own state in order to skip serialization/deserialization. 
-This respects the single responsibilty principle. This is also more explicit, allowing each device to define its own fields.
-The controller is divided in two subsections, a ViewManager and a DeviceManager, marking the fact that we want our view 
-and model to be as orthogonal as possible.
+HOMER is built on the MVC (model-view-control) architecture. 
+In order to start JavaFX, JFXapplication will be our application's entry point.
+JFXApplication will instance the controller, which is responsible for getting inputs from the views,
+and updating the model consequently. The controller also sends back state updates to the various views.
+The model part is composed by the devices and electrical outlets.
 
 
 \section{Detailed Design}
@@ -96,7 +96,7 @@ Problem: The system needs a composable logger, which has to track both state upd
 of devices. The need for composition stems from the fact that different use cases of the software might need just a subset
 of the logging capabilities. The logger must also be dynamically composable for maximum flexibility.
 Solution: used the Decorator design pattern, which allows to wrap dynamically objects at runtime and compose them.
-Not using abstract classes also takes away the problems of inheritance.
+Not using abstract classes also takes away the problems of inheritance. \newline
 \includegraphics[width=16cm]{uml/logger.png}
 
 \textbf{Air conditioning and Heating}\newline
@@ -106,7 +106,7 @@ device decreases the environment's temperature, whereas the heating device raise
 Solution: Since the only function that actually changes between the two implementations is the one responsible for updating the
 environment's temperature, the template method pattern was used. 
 The method updateTick, responsible to update the environment and electrical consumption when called by the controller,
-is a template method, and calls the abstract method updateTemperature.
+is a template method, and calls the abstract method updateTemperature. \newline
 
 \includegraphics[width=16cm]{uml/abstractTemperaturechanger.png}
 
@@ -142,7 +142,7 @@ Tested classes:
 	\item AirqualityStateTest
 	\item AbstractTemperatureChangerTest
 	\item AirConditioningTest
-	\item  HeatingTest
+	\item HeatingTest
 	\item LoggerImplTest
 \end{itemize}
 
@@ -191,7 +191,7 @@ made me more  self reliant, and allowed me to dig deeper into problems.
 \chapter{User guide}
 
 In the main tab, there are 3  tabs: devices, scheduler and graphs.
-In the devices tab, there is an add window button. after selecting a device,
+In the devices tab, there is an add window button. After selecting a device,
 it will be created (and will be inserted at the bottom). Each device has a remove device button
 used to disconnect it, and may have some kind of utility to set its state. \newline
 At the bottom there are the scheduler buttons, which allow the user to set scheduler speed, pause it and resume it.
