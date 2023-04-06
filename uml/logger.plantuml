@@ -15,3 +15,23 @@ void log(String string);
 }
 
 @enduml
+interface View() {
+    void update()
+}
+
+class Logger implements View {
+    void setLoggingLevel(LoggingLevel)
+    void setOutputStream(OutputStream)
+    void update()
+}
+
+class Controller {
+	- deviceToView: HashMap<Device, DeviceGUI>
+	- viewToDevice: HashMap<DeviceGUI, Device>
+	+ updateLoop()
+    void addView(View)
+    void removeView(View)
+}
+
+Controller -- Logger
+@enduml
