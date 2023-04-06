@@ -89,6 +89,8 @@ and model to be as orthogonal as possible.
 
 \section{Detailed Design}
 
+\subsection{Michele Ceccacci}
+
 \textbf{Logger} \newline
 Problem: The system needs a composable logger, which has to track both state updates in devices and connections/disconnections
 of devices. The need for composition stems from the fact that different use cases of the software might need just a subset
@@ -111,10 +113,28 @@ is a template method, and calls the abstract method updateTemperature.
 
 \chapter{Development}
 \section{Automated testing}
-We used unit testing on especially on the model to prevent regressions, and we tested observable behaviour only.
+We used unit testing especially on the model to prevent regressions, and we tested observable behaviour only.
 Our unit test suite uses JUnit.
 We decided not to test UI components, since our UI is not the main foucs,
 and other areas of the model would benefit more from more granular testing. 
+Tested classes:
+\begin{itemize}
+	\item Temperature
+	\item Bounds
+	\item Limit
+	\item Clock
+	\item NormalizedValue
+	\item DurationConverter
+	\item ElectricalMeter
+	\item Actuator
+	\item Lights
+	\item Locks
+	\item Outlets
+	\item Scheduler
+	\item temperaturechangers
+	\item Window
+	\item Logger
+\end{itemize}
 
 \subsection{Michele Ceccacci}
 \begin{itemize}
@@ -129,7 +149,7 @@ and other areas of the model would benefit more from more granular testing.
 
 \section{Workflow}
 The first step in our process was domain analysis, and then the insights gained were applied by modeling 
-the project's main interfaces by using UML. 
+the project's main interfaces by using UML.
 We used Git as our DCVS. We used gitflow and feature branching, with dev as our development branch,
 and main as our stable branch for releases. The workflow is based on pull requests and forks, allowing for asynchronous feedback when needed.
 Group meeting were only needed to discuss refactors. 
