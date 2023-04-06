@@ -88,32 +88,26 @@ and model to be as orthogonal as possible.
 
 
 \section{Detailed Design}
-\subsection{Michele Ceccacci}
-I developed the interfaces to add/remove devices, ui components to handle user inputs,
-and the application's logger. Furthermore, i also created the air quality sensor,
-and the devices responsible for temperature changers (heating and air conditioning).
 
 \textbf{Logger} \newline
-I was tasked with creating a logger, responsible for tracking 
-the application's whole state. 
-Problem: The logger has to be extensible, and needs to support loggers wrapping each other.
-for example we might want to log timestamps first, and add some verbose warnings in some specific cases,
-or vice versa.
-We also want to be able to do this dynamically. We want to favour composition over inheritance, in order to make code simpler.
-Solution: used the Decorator design pattern, which allows to wrap dynamically objects at runtime,
-and overload their functionalities. It also allows for wrapping, and takes away the problems of inheritance. \newline
+Problem: The system needs a composable logger, which has to track both state updates in devices and connections/disconnections
+of devices. The need for composition stems from the fact that different use cases of the software might need just a subset
+of the logging capabilities. The logger must also be dynamically composable for maximum flexibility.
+Solution: used the Decorator design pattern, which allows to wrap dynamically objects at runtime and compose them.
+Not using abstract classes also takes away the problems of inheritance.
 \includegraphics[width=16cm]{uml/logger.png}
 
 \textbf{Air conditioning and Heating}\newline
-Problem: In HOMER, air conditioning and heating devices basically do the same thing, but with a small difference. As long as they are
-active, they bring up or down the environment's temperature by 1 degree celsius multiplied by their intensity for each hour that passed
-since the last update.
-We might also want to add new kind of temperature changers in the future, reacting differently to high/low temperatures.
+Problem: 
+Air conditioning and Heating devices have really similar behaviours. The difference between the two, is that an air conditioning
+device decreases the environment's temperature, whereas the heating device raises it.
 Solution: Since the only function that actually changes between the two implementations is the one responsible for updating the
-environment's temperature, we can use the template method pattern on the updateTemperature method. This allows us to keep maximum
-flexibility in our implementation, and still limit our inheritance to one level, while still respecting the DRY principle.
+environment's temperature, the template method pattern was used. 
+The method updateTick, responsible to update the environment and electrical consumption when called by the controller,
+is a template method, and calls the abstract method updateTemperature.
 
 \includegraphics[width=16cm]{uml/abstractTemperaturechanger.png}
+
 
 \chapter{Development}
 \section{Automated testing}
@@ -121,14 +115,6 @@ We used unit testing on especially on the model to prevent regressions, and we t
 Our unit test suite uses JUnit.
 We decided not to test UI components, since our UI is not the main foucs,
 and other areas of the model would benefit more from more granular testing. 
-
-
-\section{Development notes}
-The first step in our process was domain analysis, and then the insights gained were applied by modeling 
-the project's main interfaces by using UML. 
-We used Git as our DCVS. We used gitflow and feature branching, with dev as our development branch,
-and main as our stable branch for releases. The workflow is based on pull requests and forks, allowing for asynchronous feedback when needed.
-Group meeting were only needed to discuss refactors. 
 
 \subsection{Michele Ceccacci}
 \begin{itemize}
@@ -138,6 +124,23 @@ Group meeting were only needed to discuss refactors.
 	\item AirConditioningTest
 	\item  HeatingTest
 	\item LoggerImplTest
+\end{itemize}
+
+
+\section{Workflow}
+The first step in our process was domain analysis, and then the insights gained were applied by modeling 
+the project's main interfaces by using UML. 
+We used Git as our DCVS. We used gitflow and feature branching, with dev as our development branch,
+and main as our stable branch for releases. The workflow is based on pull requests and forks, allowing for asynchronous feedback when needed.
+Group meeting were only needed to discuss refactors. 
+
+\subsection{Michele Ceccacci}
+\begin{itemize}
+	\item Add/remove devices interface.
+	\item Actuated devices view
+	\item Airconditioning/Heating view and model implementations
+	\item Air quality view and model implmentation
+	\item Application Logger 
 \end{itemize}
 
 \subsection{Michele Ceccacci}
