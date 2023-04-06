@@ -1,3 +1,23 @@
 @startuml
 
+interface TemperatureChanger {
+
+    + void setMaxTemperature(Temperature temperature);
+
+    + void setMinTemperature(Temperature temperature);
+}
+
+abstract class AbstractTemperatureChanger implements TemperatureChanger {
+    abstract void updateTemperature(Duration deltaTime); 
+}
+
+class AirConditioning extends AbstractTemperatureChanger {
+    void updateTemperature(final Duration deltaTime);
+    + TemperatureChangerState getState();
+}
+
+class Heating extends AbstractTemperatureChanger {
+    void updateTemperature(final Duration deltaTime);
+    + TemperatureChangerState getState();
+}
 @enduml
