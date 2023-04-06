@@ -1,6 +1,6 @@
 @startuml
 
-interface Logger {
+interface Logger extends DeviceViewer {
 
     + void setOutputStream(OutputStream outputStream);
 
@@ -17,21 +17,17 @@ interface DeviceViewer {
 }
 
 
-class LoggerImpl {
+class LoggerImpl implements Logger {
     + LoggerImpl(OutputStream outputStream)
 }
 
-class TimeStampLogger {
-    TimeStampLogger(Logger logger, Clock clock)
+class TimeStampLogger implements Logger {
+   + TimeStampLogger(Logger logger, Clock clock)
 }
 
-class WarningLogger {
-    public WarningLogger(Logger logger)
+class WarningLogger implements Logger {
+    + public WarningLogger(Logger logger)
 }
 
-Logger --|> DeviceViewer
-LoggerImpl --|> Logger
-WarningLogger --|> Logger
-TimeStampLogger --|> Logger
 
 @enduml
