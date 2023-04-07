@@ -1,12 +1,30 @@
 \subsection{Michele Ceccacci}
+
 \begin{itemize}
-	\item Add/remove devices interface.
-	\item Actuated devices view
-	\item Airconditioning/Heating view and model implementations
-	\item Air quality view and model implmentation
-	\item Application Logger 
+    \item Utility classes
+    \begin{itemize}
+        \item \texttt{homer.common.temperature.*} 
+		\item \texttt{homer.common.time.DurationConverter}
+    \end{itemize}
+	\item Model
+	\begin{itemize}
+		\item \texttt{homer.model.temperaturechangers.*}
+		\item \texttt{homer.model.airquality.*}
+	\end{itemize}
+	\item Logger
+	\begin{itemize}
+		\item \texttt{homer.view.logger.*}
+	\end{itemize}
+	\item JavaFx view
+	\begin{itemize}
+		\item \texttt{homer.view.javafx.deviceview.*}
+		\item \texttt{homer.view.javafx.JFXDeviceViewer} Responsible for most of the implementation
+		\item \texttt{homer.view.javafx.*} Did most of the work on JFXDeviceViewer and everything in the other classes.
+	\end{itemize}
+
 \end{itemize}
 
 I contributed to the architecture of DeviceViewer and the Controller class.
-I also worked on most of the device views, and AddDeviceView, and the components that
-where reused in the whole UI such as SliderComponent.
+
+I also have minor contributions to the controllerImpl class, namely sending updates on temperature and air quality changes.
+Whenever i noticed repeated code in the codebase i took charge of implementing a common solution, such as DurationConverter.
