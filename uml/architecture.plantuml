@@ -1,16 +1,25 @@
-@startuml
+@startuml architecture
+
+interface Device {
+    + getState(): DeviceState
+}
 
 interface Controller {
-    + getDevices(): List<Device>
+    + receiveCommand(Command)
 }
-interface Device {
-    + getID()
-    + getType()
-    + getState()
-}
-interface Dashboard {}
 
-Controller -- Device
-Controller -- Dashboard
+interface DeviceManager {
+    + getDevices(): List<Device<?>>
+    + updateDeviceState(DeviceId, DeviceState)
+}
+
+interface DeviceViewer {
+    + updateDeviceState(DeviceId, DeviceState)
+}
+
+Controller -> DeviceManager: runs command
+DeviceManager -- Device
+DeviceManager -> DeviceViewer: sends update
+DeviceViewer -> Controller: sends command
 
 @enduml
