@@ -1,0 +1,45 @@
+\subsection{Simone Magnani}
+\begin{itemize}
+    \item Utility classes
+    \begin{itemize}
+        \item \texttt{homer.common.bounds.*} for the abstraction of boundary values
+        \item \texttt{homer.common.history.*} for the concept of data associated to a time
+        \item \texttt{homer.common.limit.*} for a common and reusable way to limit values
+        \item \texttt{homer.common.time.Clock*} for the concept of tracking custom time
+    \end{itemize}
+    \item For the simulation core
+    \begin{itemize}
+        \item \texttt{homer.core.*}
+        \item \texttt{homer.view.sim.*}
+    \end{itemize}
+    \item For the implementation of the temperature scheduler
+    \begin{itemize}
+        \item \texttt{homer.controller.scheduler.*}
+        \item \texttt{homer.model.scheduler.*}
+        \item \texttt{homer.view.scheduler.*}
+    \end{itemize}
+    \item For the implementation of the graphs
+    \begin{itemize}
+        \item \texttt{homer.controller.history.*}
+        \item \texttt{homer.model.history.*}
+        \item \texttt{homer.view.graph.*} 
+    \end{itemize}
+    \item Devices
+    \begin{itemize}
+        \item \texttt{homer.model.lock.*}
+        \item \texttt{homer.model.thermometer.*}
+        \item \texttt{homer.model.environment.*} for the concept of physical environment
+        \item \texttt{homer.model.actuator.*} for the concept of actuator and the abstraction of actuated devices
+        \item \texttt{homer.model.blinds.*}
+        \item \texttt{homer.model.door.*}
+        \item \texttt{homer.model.window.*}
+    \end{itemize}
+\end{itemize}
+
+I have contributed to the establishing of the architecture eg. \texttt{Device} and \texttt{Controller} interfaces.
+
+When I had some ideas that could be used by someone else eg. \texttt{Environment, Bounds, Limit},
+I would open a pull request, which allowed everyone to be aware of it, and who could chime in and provide their feedback.
+
+I have also contributed in minor parts to the entrypoint and \texttt{Controller} implementation, for the integration of my code,
+and \texttt{JFXDeviceViewer}.
