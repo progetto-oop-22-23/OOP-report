@@ -110,6 +110,7 @@ is a template method, and calls the abstract method updateTemperature. \newline
 
 \includegraphics[width=16cm]{uml/abstractTemperaturechanger.png}
 
+\input{magnani/design.tex}
 
 \chapter{Development}
 \section{Automated testing}
@@ -120,19 +121,11 @@ and other areas of the model would benefit more from more granular testing.
 Tested classes:
 \begin{itemize}
 	\item Temperature
-	\item Bounds
-	\item Limit
-	\item Clock
-	\item NormalizedValue
 	\item DurationConverter
 	\item ElectricalMeter
-	\item Actuator
 	\item Lights
-	\item Locks
 	\item Outlets
-	\item Scheduler
 	\item temperaturechangers
-	\item Window
 	\item Logger
 \end{itemize}
 
@@ -146,6 +139,7 @@ Tested classes:
 	\item LoggerImplTest
 \end{itemize}
 
+\input{magnani/testing.tex}
 
 \section{Workflow}
 The first step in our process was domain analysis, and then the insights gained were applied by modeling 
@@ -163,6 +157,10 @@ Group meeting were only needed to discuss refactors.
 	\item Application Logger 
 \end{itemize}
 
+\input{magnani/workflow.tex}
+
+\section{Development Notes}
+
 \subsection{Michele Ceccacci}
 \begin{itemize}
 	\item \textbf{Optional}s were used when the value could either be present or not
@@ -172,6 +170,8 @@ Group meeting were only needed to discuss refactors.
 	\item \textbf{JavaFX} was used to develop view Components
 	\item \textbf{Generics} were used to reduce code duplication, especially in the view
 \end{itemize}
+
+\input{magnani/devnotes.tex}
 
 \chapter{Final comments}
 
@@ -186,6 +186,8 @@ to an existing project or fixing tickets, rather than actual softare architectur
 I was familiar proficient at git, but i still made some occasional mistakes.
 I think that working in a team without a more senior figure acting as the  lead definitely 
 made me more  self reliant, and allowed me to dig deeper into problems.
+
+\input{magnani/selfeval.tex}
 
 \appendix
 \chapter{User guide}
