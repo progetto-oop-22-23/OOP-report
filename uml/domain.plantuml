@@ -1,41 +1,23 @@
-@startuml
+@startuml domain
 
-left to right direction
+' left to right direction
 
-interface Controller {
-    + addDevice(Device)
-    + getDevices(): List<DeviceGUI>
-    - setDeviceState(DeviceID, DeviceState)
-    - getDeviceState(DeviceID): DeviceState
-    ' + addToggleableDevice()
-    ' + addAdjustableDevice()
-    ' + addSensorDevice()
-	+ updateDevice(DeviceGUI dev): void
-	/'
-		newState = dev.getState();
-		viewToDevice.get(dev.getID())
-					.setState(newState);
-	'/
-}
-
+interface Controller {}
+interface DeviceManager {}
+interface DeviceState {}
 interface Device {
-    + getID(): DeviceID
-    + getType(DeviceType)
-    + setState(DeviceState)
     + getState(): DeviceState
 }
 
-interface HomeEnvironment {
-    + setTemp(Temperature)
-    + getTemp(): Temperature
-    + setAirQuality(AirQuality)
-    + getAirQuality(): AirQuality
+interface AdjustableDevice extends Device {
+    + setState(DeviceState)
+}
+interface ToggleableDevice extends Device {
+    + toggle()
 }
 
-interface Temperature extends Supplier
-interface AirQuality extends Supplier
-
-Controller -- Device
-Device -- HomeEnvironment
+Controller -- DeviceManager
+DeviceState -- Device
+Device -- DeviceManager
 
 @enduml
