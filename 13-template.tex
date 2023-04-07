@@ -143,13 +143,22 @@ Group meeting were only needed to discuss refactors.
 \appendix
 \chapter{User guide}
 
-In the main tab, there are 3  tabs: devices, scheduler and graphs.
-In the devices tab, there is an add window button. After selecting a device,
+The main view is divided in two sections horizontally. \newline
+Above there are 3 tabs: DEVICES, SCHEDULER and GRAPHS. \newline
+At the bottom there is the SIMULATION information and control section, which reports the simulation time and the time rate, and allows the user to pause and resume the simulation, or change the time rate. \newline
+In the DEVICES tab, there is an add window button. After selecting a device,
 it will be created (and will be inserted at the bottom). Each device has a remove device button
 used to disconnect it, and may have some kind of utility to set its state. \newline
-At the bottom there are the scheduler buttons, which allow the user to set scheduler speed, pause it and resume it.
-In the scheduler view, the user can select time slices for heating. \newline % TODO this needs to be explained better.
-In the graph view, temperature and air quality stats are displayed (provided the user already connected a related sensor).
+In the SCHEDULER tab, the user can select the desired temperature range in time of the day intervals (schedule). \newline
+No interval can be overlapping with another. The application will prevent the user from trying to do so, and notify them. \newline
+When a schedule is present, the domotic controller will try to attain the desired parameters, provided that:
+\begin{itemize}
+	\item A thermometer is connected
+	\item For heating: a heater is connected
+	\item For cooling: an air conditioner is connected
+\end{itemize}
+In the GRAPHS tab, the user can visualize temperature, global consumption, and air quality parameters, logged at intervals of 1 hour. \newline
+In order to visualize temperature and air quality parameters, either a thermometer or an air quality sensor, respectively, should be connected.
 
 %TODO: describe outlet view.
 
