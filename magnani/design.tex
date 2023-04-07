@@ -1,0 +1,81 @@
+\subsection{Simone Magnani}
+
+% \begin{figure}[H]
+% \centering{}
+% \includegraphics{magnani/analysisa.pdf}
+% \caption{Schema UML dell'analisi del problema, con rappresentate le entità principali ed i rapporti fra loro}
+% \label{img:analysis}
+% \end{figure}
+
+
+
+% \paragraph{Problema} GLaDOS ha più personalità intercambiabili, la cui presenza deve essere trasparente al client.
+
+% \paragraph{Soluzione} Il sistema per la gestione della personalità utilizza il \textit{pattern Strategy}, come da
+% \Cref{img:strategy}: le implementazioni di \texttt{Personality} possono essere modificate, e la
+% modifica impatta direttamente sul comportamento di GLaDOS.
+
+\subsubsection{Devices}
+\subsubsection{Simulation}
+\subsubsection{Temperature Scheduler}
+\subsubsection{Graphs}
+
+% ## Window
+
+% Problem: we might want to create a more realistic actuator
+% Solution: Actuator interface -> Strategy
+
+% Problem: Actuator in MechanizedWindow (we might want to change it eg. use a more realistic one)
+% Solution: pass the actuator in the constructor, this allows to use different actuators without having to create other Window implementations that would only be different in terms of which actuator is being used.
+
+% Problem: min,max values everywhere
+% Solution: encapsulate them in a Bounds class
+
+% ## Thermometer
+
+% ### Environment
+
+% Problem: Temperature sensor, AC, heater share the same temperature
+% Solution: SRP -> Home Environment
+% each device should only do 1 thing
+
+% Problem: devices in the environment
+% Solution: interface EnvironmentObject (mediator pattern? but it would need to notify observers too)
+
+% ## Door
+
+% Problem: door implementation would basically mimic the window one
+% Solution: create ActuatedDevice and AbstractActuatedDevice
+
+% ## Simulation
+
+% Problem: Executors does not keep running the loop if an exception occurs, we have to display an error.
+% Solution: ?
+
+% ## Scheduler
+
+% Problem: scheduler actions
+% Solution: Command pattern
+
+% Problem: generalize commands for both heating and cooling
+% Solution: Function
+
+% Problem: adding of time (overlapse between begin and end, and at 24h/00h of next day)
+
+% Problem: commands are being reattempted even if intensity is already met
+
+% ## Graphs
+
+% Problem: We have to choose which thermometer to log.
+% Solution: FindFirst / FindAny
+% This solution would not work with multiple thermometers in different environments.
+% In that case it would be better to choose a particular thermometer to log, or to have multiple logs for all the different thermometers.
+
+% Problem: log quantity
+% Solution: chose to log at each hour for design simplicity. Could also have logged each tick, but it would have led to some pretty confusing graphs due to the time axis not being linear. In the future, the time between each log could be configured. It could also be possible to log more frequently but choose to display at a larger interval of time.
+
+% Problem: refresh
+% Solution: chose to refresh all the data each update for simplicity
+
+% Problem: multiple graphs
+% Solution: create graph view with builder pattern
