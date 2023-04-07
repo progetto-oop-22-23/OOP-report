@@ -44,7 +44,6 @@ Some devices should act in a somewhat random way (but still predictable), while 
 		\item Electrical outlets
 		\item Doors, Locks and windows
 		\item Temperature changer devices
-		\item Air quality sensors
 	\end{itemize}
 	\item Devices can be added/removed at runtime.
 	\item A logger is needed in order to allow users (and possibly machines) to keep track of state changes.
@@ -125,29 +124,13 @@ We used Git as our DCVS. We used gitflow and feature branching, with dev as our 
 and main as our stable branch for releases. The workflow is based on pull requests and forks, allowing for asynchronous feedback when needed.
 Group meeting were only needed to discuss refactors. 
 
-\subsection{Michele Ceccacci}
-\begin{itemize}
-	\item Add/remove devices interface.
-	\item Actuated devices view
-	\item Airconditioning/Heating view and model implementations
-	\item Air quality view and model implmentation
-	\item Application Logger 
-\end{itemize}
-\section{Development notes}
 
+\input{ceccacci/workflow.tex}
 \input{magnani/workflow.tex}
 
 \section{Development Notes}
 
-\subsection{Michele Ceccacci}
-\begin{itemize}
-	\item \textbf{Optional}s were used when the value could either be present or not
-	\item \textbf{Streams} were used to access and modify data, especially data that used optional types
-	\item \textbf{Records} to make data immutability more explicit, and to avoid reimplementing constructors/HashCode methods
-	\item \textbf{Lambda} functions and functional interfaces were used to make code more readable and often complemented streams 
-	\item \textbf{JavaFX} was used to develop the main view.
-\end{itemize}
-
+\input{ceccacci/devnotes.tex}
 \input{magnani/devnotes.tex}
 
 \chapter{Final comments}
