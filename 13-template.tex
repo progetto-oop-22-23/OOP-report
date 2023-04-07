@@ -88,6 +88,11 @@ The model part is composed by the devices and electrical outlets.
 
 
 \section{Detailed Design}
+Problem: Sending updates from the view to the controller. 
+We need a common way for all the UI components to send the same kind of updates to the controller without repeating code.
+We also want the controller to have more control over what is actually execute, and when it is executed. So the controller acts as a receiver.
+All the commands implement an execute method, that is called inside the controller.
+Solution: Used the command pattern
 
 \subsection{Michele Ceccacci}
 
@@ -156,6 +161,7 @@ Group meeting were only needed to discuss refactors.
 	\item Air quality view and model implmentation
 	\item Application Logger 
 \end{itemize}
+\section{Development notes}
 
 \input{magnani/workflow.tex}
 
@@ -167,8 +173,7 @@ Group meeting were only needed to discuss refactors.
 	\item \textbf{Streams} were used to access and modify data, especially data that used optional types
 	\item \textbf{Records} to make data immutability more explicit, and to avoid reimplementing constructors/HashCode methods
 	\item \textbf{Lambda} functions and functional interfaces were used to make code more readable and often complemented streams 
-	\item \textbf{JavaFX} was used to develop view Components
-	\item \textbf{Generics} were used to reduce code duplication, especially in the view
+	\item \textbf{JavaFX} was used to develop the main view.
 \end{itemize}
 
 \input{magnani/devnotes.tex}
