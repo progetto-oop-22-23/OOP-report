@@ -46,7 +46,7 @@ Some devices should act in a somewhat random way (but still predictable), while 
 		\item Temperature changer devices
 	\end{itemize}
 	\item Devices can be added/removed at runtime.
-	\item A logger is needed in order to allow users (and possibly machines) to keep track of state changes.
+	\item A logger is needed in order to allow users to keep track of state changes. It also makes debugging easier for developers.
 	\item The software should have graph views for temperature and air quality state.
 	\item The users should be able to see electrical consumption.
 \end{itemize}
@@ -60,6 +60,7 @@ Some devices should act in a somewhat random way (but still predictable), while 
 \end{itemize}
 
 \section{Analysis and domain model}
+\subsection[]{Domain analysis}
 
 The application will emulate a domotic environment, some smart devices and facilities monitoring.
 Smart devices are common domestic devices as lights, electrical outlets, windows, doors and various sensors 
@@ -69,22 +70,17 @@ The user will interact with the devices via the controller through a dashboard.
 The main challenge will be modelling the communication between the controller 
 and the different devices, which can have very different states.
 
-\begin{figure}[H]
-\centering{}
-\includegraphics{img/analysis.pdf}
-\caption{Schema UML dell'analisi del problema, con rappresentate le entità principali ed i rapporti fra loro}
-\label{img:analysis}
-\end{figure}
-
 \chapter{Design}
 \section{Architecture}
 
-HOMER is built on the MVC (model-view-control) architecture. 
-In order to start JavaFX, JFXapplication will be our application's entry point.
-JFXApplication will instance the controller, which is responsible for getting inputs from the views,
+HOMER is built on the MVC (model-view-controller) architecture. 
+In order to start the JavaFX thread, JFXapplication will be our application's entry point.
+JFXApplication will instantiate the controller, which is responsible for getting inputs from the views,
 and updating the model consequently. The controller also sends back state updates to the various views.
-The model part is composed by the devices and electrical outlets.
-
+The model part is composed by the devices and electrical outlets. Each device has a state of its own, that
+the controller gets and sends to the views. 
+Each view is independent from each other, and when a view commands a state update
+the controller processses the change and then updates all the views.
 
 \section{Detailed Design}
 Problem: Sending updates from the view to the controller. 
@@ -107,14 +103,13 @@ and we decided to opt for string representations instead of enums to allow for f
 \section{Automated testing}
 We used unit testing especially on the model to prevent regressions, and we tested observable behaviour only.
 Our unit test suite uses JUnit.
-We decided not to test UI components, since our UI is not the main foucs,
+We decided not to test UI components, since our UI is not the main focus,
 and other areas of the model would benefit more from more granular testing. 
+
 Tested classes:
 \begin{itemize}
 	\item Temperature
 	\item DurationConverter
-	\item ElectricalMeter
-	\item Lights
 	\item Outlets
 	\item temperaturechangers
 	\item Logger
