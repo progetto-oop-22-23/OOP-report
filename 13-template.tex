@@ -94,6 +94,14 @@ the controller gets and sends to the views.
 Each view is independent from each other, and when a view commands a state update
 the controller processses the change and then updates all the views.
 
+\begin{figure}[H]
+\centering{}
+\includegraphics[keepaspectratio]{uml/architecture.png}
+% \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{uml/architecture.png}
+\caption{UML diagram of the architecture}
+\label{uml:architecture}
+\end{figure}
+
 \section{Detailed Design}
 Problem: Sending updates from the view to the controller. 
 We need a common way for all the UI components to send the same kind of updates to the controller without repeating code.
