@@ -91,7 +91,13 @@ Problem: Sending updates from the view to the controller.
 We need a common way for all the UI components to send the same kind of updates to the controller without repeating code.
 We also want the controller to have more control over what is actually execute, and when it is executed. So the controller acts as a receiver.
 All the commands implement an execute method, that is called inside the controller.
-Solution: Used the command pattern
+Solution: Used the command pattern, which allows %TODO needs better phrasing and a uml diagram 
+different views to send the same updates to the controller, avoiding code duplication
+Commands that create devices need to be displayed to the user, so we created a new interface called CreateDeviceCommand
+and we decided to opt for string representations instead of enums to allow for further expansibility.
+\newline
+\includegraphics[width=12cm]{uml/command.png}
+
 
 
 \input{ceccacci/design.tex}

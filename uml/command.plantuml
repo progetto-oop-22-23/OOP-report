@@ -1,0 +1,27 @@
+@startuml
+
+interface Command {
+    + void execute(Controller controller)
+}
+
+interface CreateDeviceCommand extends Command {
+    + String getStringRep()
+}
+
+class UpdateDeviceState implements Command {
+
+}
+
+class DisconnectAllDevices implements Command {
+
+}
+
+class CreateHeating implements CreateDeviceCommand {
+
+}
+
+class CreateAirConditioning implements CreateDeviceCommand {
+    
+}
+
+@enduml
