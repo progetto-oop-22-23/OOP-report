@@ -94,27 +94,8 @@ We also want the controller to have more control over what is actually execute, 
 All the commands implement an execute method, that is called inside the controller.
 Solution: Used the command pattern
 
-\subsection{Michele Ceccacci}
 
-\textbf{Logger} \newline
-Problem: The system needs a composable logger, which has to track both state updates in devices and connections/disconnections
-of devices. The need for composition stems from the fact that different use cases of the software might need just a subset
-of the logging capabilities. The logger must also be dynamically composable for maximum flexibility.
-Solution: used the Decorator design pattern, which allows to wrap dynamically objects at runtime and compose them.
-Not using abstract classes also takes away the problems of inheritance. \newline
-\includegraphics[width=16cm]{uml/logger.png}
-
-\textbf{Air conditioning and Heating}\newline
-Problem: 
-Air conditioning and Heating devices have really similar behaviours. The difference between the two, is that an air conditioning
-device decreases the environment's temperature, whereas the heating device raises it.
-Solution: Since the only function that actually changes between the two implementations is the one responsible for updating the
-environment's temperature, the template method pattern was used. 
-The method updateTick, responsible to update the environment and electrical consumption when called by the controller,
-is a template method, and calls the abstract method updateTemperature. \newline
-
-\includegraphics[width=16cm]{uml/abstractTemperaturechanger.png}
-
+\input{ceccacci/design.tex}
 \input{magnani/design.tex}
 
 \chapter{Development}
@@ -134,16 +115,7 @@ Tested classes:
 	\item Logger
 \end{itemize}
 
-\subsection{Michele Ceccacci}
-\begin{itemize}
-	\item TemperatureTest
-	\item AirqualityStateTest
-	\item AbstractTemperatureChangerTest
-	\item AirConditioningTest
-	\item HeatingTest
-	\item LoggerImplTest
-\end{itemize}
-
+\input{ceccacci/testing.tex}
 \input{magnani/testing.tex}
 
 \section{Workflow}
@@ -182,16 +154,7 @@ Group meeting were only needed to discuss refactors.
 
 \section{Self evaluation and final comments}
 
-\subsection{Michele Ceccacci}
-This project definitely improved my teamworking and software architecture skills. 
-This was my first time participating in a greenfield project this big, and my first time 
-taking architectural decisions that would carry over the whole software's lifecycle. 
-In my previous work experience and open source contriubtions, i was more focused on  adding new features 
-to an existing project or fixing tickets, rather than actual softare architecture. 
-I was familiar proficient at git, but i still made some occasional mistakes.
-I think that working in a team without a more senior figure acting as the  lead definitely 
-made me more  self reliant, and allowed me to dig deeper into problems.
-
+\input{ceccacci/selfeval.tex}
 \input{magnani/selfeval.tex}
 
 \appendix
