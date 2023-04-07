@@ -1,6 +1,6 @@
 \subsection{Michele Ceccacci}
 
-\textbf{Logger} \newline
+\subsubsection{Logger} 
 Problem: The system needs a composable logger, which has to track both state updates in devices and connections/disconnections
 of devices. The need for composition stems from the fact that different use cases of the software might need just a subset
 of the logging capabilities. The logger must also be dynamically composable for maximum flexibility.
@@ -8,7 +8,7 @@ Solution: used the Decorator design pattern, which allows to wrap dynamically ob
 Not using abstract classes also takes away the problems of inheritance. \newline
 \includegraphics[width=16cm]{uml/logger.png}
 
-\textbf{Air conditioning and Heating}\newline
+\subsubsection{Air conditioning and Heating}
 Problem: 
 Air conditioning and Heating devices have really similar behaviours. The difference between the two, is that an air conditioning
 device decreases the environment's temperature, whereas the heating device raises it.
