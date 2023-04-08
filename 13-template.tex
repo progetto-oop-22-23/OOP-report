@@ -86,9 +86,8 @@ and the different devices, which can have very different states.
 \section{Architecture}
 
 HOMER is built on the MVC (model-view-controller) architecture. 
-In order to start the JavaFX thread, JFXapplication will be our application's entry point.
-JFXApplication will instantiate the controller, which is responsible for getting inputs from the views,
-and updating the model consequently. The controller also sends back state updates to the various views.
+The controller is responsible for getting inputs from the views, and updating the model consequently.
+The controller also sends back state updates to the various views.
 The model part is composed by the devices and electrical outlets. Each device has a state of its own, that
 the controller gets and sends to the views. 
 Each view is independent from each other, and when a view commands a state update
