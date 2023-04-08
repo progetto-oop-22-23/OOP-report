@@ -21,7 +21,9 @@ is a template method, and calls the abstract method updateTemperature. \newline
 
 \subsubsection{Passing state updates to the view}
 Problem: devices have really different states, and they all need to passed down to the view.
-I took inspiration from REST applications, and implemented a DeviceState interface, which all device states would implement.
+I took inspiration from REST applications, and thought about implementing a  serialization/deserialization protocol.
+Since the view and the model don't need to communicate over a network, in the end i decided to just implement a DeviceState interface, 
+which all device states implement.
 Then i defined a single command for state updates, so that the view could create a component for the specific device in case
-the device wasn't already present. For device removals, i just created a single removeDevice Method in the DeviceViewer interface, 
+the device wasn't already present. I also created a command for device removals, i just created a single removeDevice Method in the DeviceViewer interface, 
 based on the deviceId. \newline % TODO this could be far better.
