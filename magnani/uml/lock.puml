@@ -1,0 +1,20 @@
+@startuml lock
+
+interface ToggleableDevice<DeviceState> {
+    + toggle()
+}
+
+class LockState implements DeviceState {
+    + isLocked(): boolean
+}
+
+interface Lock extends ToggleableDevice {
+    + getState(): LockState
+    + toggle()
+}
+
+class SimpleLock implements Lock {}
+
+Lock --* LockState
+
+@enduml

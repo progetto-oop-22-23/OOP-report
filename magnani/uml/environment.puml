@@ -1,0 +1,10 @@
+@startuml environment
+
+interface Environment {
+    + getTemperature(): Temperature
+    + setTemperature(Temperature)
+}
+
+class HomeEnvironment implements Environment {}
+
+@enduml

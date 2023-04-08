@@ -1,0 +1,22 @@
+@startuml actuateddevice
+
+interface ActuatedDevice extends AdjustableDevice, DiscreteObject {}
+
+abstract AbstractActuatedDevice implements ActuatedDevice {
+    + AbstractActuatedDevice(Actuator)
+    + getState(): ActuatedDeviceState
+    + setState(DeviceState)
+    + updateTick(Duration)
+}
+
+class MechanizedBlinds extends AbstractActuatedDevice {}
+class MechanizedDoor extends AbstractActuatedDevice {}
+class MechanizedWindow extends AbstractActuatedDevice {}
+
+class ActuatedDeviceState implements DeviceState {
+    + getPosition()
+}
+
+ActuatedDevice --* ActuatedDeviceState
+
+@enduml

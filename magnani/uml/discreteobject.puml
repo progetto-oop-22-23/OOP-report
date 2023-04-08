@@ -1,0 +1,7 @@
+@startuml discreteobject
+
+interface DiscreteObject {
+    + updateTick(deltaTime: Duration)
+}
+
+@enduml

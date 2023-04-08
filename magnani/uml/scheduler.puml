@@ -1,0 +1,29 @@
+@startuml scheduler
+
+' left to right direction
+
+
+class TimeSchedule<T> << Record >> << (R, red) >> {
+	+ timeRange: Bounds<LocalTime>
+	+ paramRange: Bounds<T>
+}
+
+interface TimeScheduler<T> {}
+class TimeSchedulerImpl<T> implements TimeScheduler {}
+
+interface TemperatureCommands {
+	+ Command doHeat()
+	+ Command stopAll()
+	+ Command doCool()
+}
+
+interface SchedulerController<T> {
+
+}
+
+class TemperatureScheduler<Temperature> implements SchedulerController {
+	+ TemperatureScheduler(TemperatureCommands)
+}
+
+
+@enduml

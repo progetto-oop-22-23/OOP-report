@@ -1,0 +1,9 @@
+@startuml clock
+
+interface DiscreteObject {}
+interface Clock extends DiscreteObject {
+    + getDateTime(): LocalDateTime
+    + setDateTime(LocalDateTime)
+}
+
+@enduml

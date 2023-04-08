@@ -1,0 +1,15 @@
+\subsubsection{Graphs}
+
+% Problem: We have to choose which thermometer to log.
+% Solution: FindFirst / FindAny
+% This solution would not work with multiple thermometers in different environments.
+% In that case it would be better to choose a particular thermometer to log, or to have multiple logs for all the different thermometers.
+
+% Problem: log quantity
+% Solution: chose to log at each hour for design simplicity. Could also have logged each tick, but it would have led to some pretty confusing graphs due to the time axis not being linear. In the future, the time between each log could be configured. It could also be possible to log more frequently but choose to display at a larger interval of time.
+
+% Problem: refresh
+% Solution: chose to refresh all the data each update for simplicity
+
+% Problem: multiple graphs
+% Solution: create graph view with builder pattern

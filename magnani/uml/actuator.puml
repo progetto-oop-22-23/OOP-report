@@ -1,0 +1,23 @@
+@startuml actuator
+
+' left to right direction
+
+interface Actuator extends DiscreteObject {
+    + command(commandedPosition)
+    + getPosition()
+    + getBounds()
+}
+
+abstract AbstractActuator implements Actuator {
+    # AbstractActuator(Bounds)
+    + getBounds()
+}
+
+class SimpleActuator extends AbstractActuator {
+    + SimpleActuator(Bounds)
+    + command(commandedPosition)
+    + getPosition()
+    + updateTick()
+}
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml thermometer
+
+interface Device<DeviceState> {
+    + getState(): DeviceState
+}
+
+class ThermometerState implements DeviceState {
+    + getTemperature(): Temperature
+}
+
+interface Thermometer extends Device, DiscreteObject {
+    + getState(): ThermometerState
+}
+
+Thermometer --* ThermometerState
+
+@enduml

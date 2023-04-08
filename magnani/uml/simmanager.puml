@@ -1,0 +1,22 @@
+@startuml simmanager
+
+interface SimManager {
+    + addObserver(observer: DiscreteObject)
+}
+
+interface SimManagerViewObserver {
+    + resume()
+    + pause()
+}
+
+interface SimManagerView {
+    + setObserver(simManager: SimManagerViewObserver)
+    + setDateTime(simTime: LocalDateTime)
+    + setTimeRate(timeRate: long)
+}
+
+class SimManagerImpl implements SimManager, SimManagerViewObserver {}
+
+SimManagerViewObserver -- SimManagerView
+
+@enduml
