@@ -146,22 +146,40 @@ L'uso inappropriato è invece valutato negativamente: a tal proposito, si raccom
 \subsection{Monticelli Alessandro}
 \subsubsection*{Electrical Meter}
 When we first ideated HOMER, we all agreed on building an Electrical Meter which let the user check the electrical consumption of the various devices during the simulation.
-I built the Electrical Meter as part of the controller in the MVC pattern. Its main role is to retreive the state of the Outlet objects and calculate the istant power absorption and the global electrical consumption.
+Its main role is to retreive the state of the Outlets and calculate the istant power absorption and the global electrical consumption.
+It also implements an automatic safety check on the consumption, which cuts the power to the most consuming Outlet when the global power absorption reaches the limit of 4kW.
+The Electrical Meter acts as part of the Controller in the MVC pattern. It's a DiscreteObject, which updates its state in the updateTick method, retrieves the state of the Outlets,
+performs the safety checks and elaborates the Power absorption and electrical consumption, then it updates the View through the view manager.
+The view manager is the class that implements the methods and keeps the references to the elements of the View for the FXML loader, it is called the controller class in the FXML standard.
+
+% UML of Electrical Meter here.
 
 \subsubsection{Outlets}
 As explained in the previous section, one of the functionalities of HOMER is the control over electrical equipement. To achieve this I built the Outlet class.
 The Outlet class has been modeled as an AdjustableDevice.
-The state of the Outlet, represented by the OutletState class, is basically the consumed power over time calculated in Watt-hours (Wh) from the device plugged into the Outlet.
-I decided not to let the Outlet know wether there's a connected device or not, I thought it made sense for the device to update its own power consumption and set that in the Outlet.
+The Outlet state is represented by the OutletState class, which stores the consumed power over time calculated in Watt-hours (Wh) from the device plugged into the Outlet, along with the minimum and the maximum value for the consumption.
+%Arguably the minimum consumption might always be considered 0.0, but I wanted to leave out more flexibility for possible future scenarios, like Outlets that can never be completely shut down, even in emergency cases as an electrical overload.
+The Outlet has no "knowledge" wether there's a plugged Device or not, I thought it was better to keep it this way, and let the device set its own power consumption and "send" it to the Outlet, basically asking for power when it needs it, emulating a real-case scenario, 
+which was my ultimate goal.
+To standardize the use of Outlets I decided to impement the Factory pattern, giving 2 standard options for the creation of Outlets: C-type Outlets (also known as Schucko), with a maximum power absorption of 3.5Kw, 
+and L-type Outlets (the standard italian outlet), with a maximum power absorption of 2kW.
+
+
+%UML of Outlets here.
+\subsubsection*{Powered Devices}
+I needed to model devices that could consume power, so I built the PoweredDevice and PoweredDeviceInfo interfaces.
+PoweredDevice contains the needed methods to control the Device's consumption, retreive the PoweredDeviceInfo associated with it, and set a new Outlet as the one its plugged.
+PoweredDeviceInfo exposes methods to retreive the Outlet the device is plugged into, along with minimum and maximum consumption of the PoweredDevice.
+
+%UML of PoweredDevice and PoweredDeviceInfo here.
 
 \subsubsection*{Lights}
+The Light class represent a very basic implementation of a ToggleableDevice and a PoweredDevice, its state is hold in the LightState class, which has methods to retreive the state of the Light (ON/OFF).
 
+%UML of Light here.
 \subsubsection*{View}
-\subsubsection{Lights}
-\subsubsection{Outlets}
-\subsubsection{Electrical Meter}
-\subsubsection{Device dashboard}
-\subsubsection{Electrical meter dashboard}
+Building the View 
+
 \subsection*{Elementi positivi}
 
 \begin{itemize}
