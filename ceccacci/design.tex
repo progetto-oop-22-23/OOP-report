@@ -25,5 +25,5 @@ I took inspiration from REST applications, and thought about implementing a  ser
 Since the view and the model don't need to communicate over a network, in the end i decided to just implement a DeviceState interface, 
 which all device states implement.
 Then i defined a single command for state updates, so that the view could create a component for the specific device in case
-the device wasn't already present. I also created a command for device removals, i just created a single removeDevice Method in the DeviceViewer interface, 
-based on the deviceId. \newline % TODO this could be far better.
+the device wasn't already present. To handle device removals, i just created a single removeDevice Method in the DeviceViewer interface, 
+based on the deviceId, since it identifies the device univocally. \newline % TODO this could be far better.
