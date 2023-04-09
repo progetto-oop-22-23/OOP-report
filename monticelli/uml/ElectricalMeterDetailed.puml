@@ -1,0 +1,64 @@
+@startuml ElectricalMeterDetailed
+
+class ElectricalMeterImpl implements ElectricalMeter, DiscreteObject{
+    -CopyOnWriteArrayList<Outlet> outlets;
+    -double globalConsumption;
+    -double averagePower;
+    -DeviceManager deviceManager;
+    -Optional<ElectricalMeterViewManager> viewManager;
+    -static final double MAX_GLOBAL_CONSUMPTION
+
+    +void setViewManager(ElectricalMeterViewManager viewManager)
+    +void setDeviceManger(final DeviceManager deviceManager)
+    +Optional<ElectricalMeterViewManager> getMeterViewManager()
+    +DeviceManager getDeviceManager()
+    -void setPoweredDeviceOutlets()
+    -void sortOutletsForConsumption()
+    -void computeAveragePower(final Duration deltaTime)
+}
+
+interface DiscreteObject {
+    +void updateTick(Duration deltaTime)
+}
+
+interface ElectricalMeter {
+    List<Outlet> getOutlets()
+    void setOutlets(List<Outlet>)
+    void addOutlet(Outlet outlet)
+    void removeOutlet(Outlet outlet)
+    void cutPowerTo(Outlet outlet)
+    void computeConsumption()
+    void checkConsumption()
+    double getGlobalConsumption()
+    double getAveragePower()
+    void setAveragePower()
+}
+
+class ElectricalMeterViewManager {
+    -ElectricalMeterImpl meter
+    -Label consumptionLabel
+    -Label powerLabel
+    -TableView<Outlet> outletTable
+    -TableColumn<Outlet, String> outletStateColumn
+    -TableColumn<Outlet, String> outletIDColumn
+    -Button addOutlet
+    -Button removeOutlet
+    -URL location
+    -ResourceBundle resources
+
+    +void setMeter(final ElectricalMeterImpl meter)
+    +ElectricalMeterImpl getMeter()
+    +void setLabels()
+    +void addOutlet()
+    +void removeOutlet() 
+}
+
+class View{
+    
+}
+
+ElectricalMeterViewManager <-- ElectricalMeterImpl : updateView
+ElectricalMeterImpl <-- ElectricalMeterViewManager : add/removeOutlet
+ElectricalMeterViewManager <-- View : User input
+View <-- ElectricalMeterViewManager : Meter commands
+@enduml

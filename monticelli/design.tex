@@ -1,0 +1,60 @@
+\subsubsection*{Electrical Meter}
+When we first ideated HOMER, we agreed to build an Electrical Meter allows the user check the electrical consumption of various devices during the simulation.
+
+Its main role is to retreive the state of the Outlets and calculate the istantaneous power absorption and the overall electrical consumption.
+It also implements an automatic safety check on the consumption as it will cut the power to the most consuming Outlet when the global power absorption reaches the limit of 4kW.
+The Electrical Meter acts as part of the Controller in the MVC pattern. 
+
+I implemented the ElectricalMeter interface in the ElectricalMeterImpl class, which updates its state in the updateTick method, where it retreives the state of the Outlets, 
+performs the safety check, and the notifies the View through the view manager, that keeps the references to the elements of the View for the FXML loader, 
+and implements the methods for retreiving User input and updating the View.
+
+\begin{figure}[H]
+    \centering{}
+    \includegraphics{uml/ElectricalMeterSimple.png}
+    \caption{ElectricalMeter simple diagram}
+    \label{monticelli:uml:meter}
+\end{figure}
+
+\begin{figure}[H]
+    \centering{}
+    \includegraphics{uml/ElectricalMeterDetailed.png}
+    \caption{ElectricalMeterImpl detailed diagram}
+    \label{monticelli:uml:meter}
+\end{figure}
+
+\subsubsection{Outlets}
+As explained in the previous section, one of the functionalities of HOMER is the control over electrical equipement. To achieve this I built the Outlet class.
+The Outlet class has been modeled as an AdjustableDevice.
+The Outlet state is represented by the OutletState class, which stores the consumed power over time calculated in Watt-hours (Wh) from the device plugged into the Outlet, along with the minimum and the maximum value for the consumption.
+The Outlet has no "knowledge" wether there's a plugged Device or not, I thought it was better to keep it this way, and let the device set its own power consumption and send it to the Outlet, virtually asking for power when it needs it, emulating a real-case scenario, 
+which was my ultimate goal.
+To standardize the use of Outlets I decided to impement the Factory pattern, giving 2 standard options for the creation of Outlets: C-type Outlets (also known as Schucko), with a maximum power absorption of 3.5Kw, 
+and L-type Outlets (the standard italian outlet), with a maximum power absorption of 2kW.
+
+\begin{figure}[H]
+    \centering{}
+    \includegraphics{uml/Outlet.png}
+    \caption{Outlet simple diagram}
+    \label{monticelli:uml:outlet}
+\end{figure}
+\subsubsection*{Powered Devices}
+I needed to model devices that could consume power, so I built the PoweredDevice and PoweredDeviceInfo interfaces.
+PoweredDevice contains the needed methods to control the Device's consumption, retreive the PoweredDeviceInfo associated with it, and set a new Outlet for the PoweredDevice.
+PoweredDeviceInfo exposes methods to retreive the Outlet the device is plugged into, along with minimum and maximum consumption of the PoweredDevice.
+
+\begin{figure}[H]
+    \centering{}
+    \includegraphics{uml/PoweredDevice.png}
+    \caption{PoweredDevice and PoweredInfo diagrams}
+    \label{monticelli:uml:poweredDevice}
+\end{figure}
+\subsubsection*{Lights}
+The Light class represent a very basic implementation of a ToggleableDevice and a PoweredDevice, its state is hold in the LightState class, which has methods to retreive the state of the Light (ON/OFF).
+
+\begin{figure}[H]
+    \centering{}
+    \includegraphics{uml/Light.png}
+    \caption{ElectricalMeter simple diagram}
+    \label{monticelli:uml:light}
+\end{figure}

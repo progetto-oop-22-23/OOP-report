@@ -1,0 +1,10 @@
+@startuml ElectricalMeterSimple
+class ElectricalMeter
+class Outlet
+interface PoweredDevice
+
+ElectricalMeter <-- Outlet : getState
+Outlet <-- ElectricalMeter : updateState
+Outlet <-- PoweredDevice : setState
+
+@enduml

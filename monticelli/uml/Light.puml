@@ -1,0 +1,14 @@
+@startuml Light
+interface PoweredDevice {
+    double getIstantConsumption()
+    void setInstantConsumption(double instantConsumption)
+    void plug(Outlet outlet)
+    PoweredDeviceInfo getPowerInfo()
+}
+
+
+class Light implements ToggleableDevice,PoweredDevice,DiscreteObject {
+    -LightState state
+    -PoweredDeviceInfo power
+}
+@enduml

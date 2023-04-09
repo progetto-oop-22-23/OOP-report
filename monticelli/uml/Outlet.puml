@@ -1,0 +1,14 @@
+@startuml Outlet
+interface AdjustableDevice {
+    OutletState getState()
+    void setState(final DeviceState state)
+
+}
+interface DiscreteObject {
+    void updateTick(final Duration deltaTime)
+}
+
+class Outlet implements AdjustableDevice, DiscreteObject{
+-OutletState state
+}
+@enduml

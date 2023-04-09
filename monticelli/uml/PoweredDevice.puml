@@ -1,0 +1,22 @@
+@startuml PoweredDevice
+interface PoweredDevice {
+    double getIstantConsumption()
+    void setIstantConsumption(double istantConsumption)
+    void plug(Outlet outlet)
+    PoweredDeviceInfo getPowerInfo()
+}
+
+class PoweredDeviceInfoImpl implements PoweredDeviceInfo {
+    -double minConsumption;
+    -double maxConsumption;
+    -Outlet outlet;
+}
+
+interface PoweredDeviceInfo {
+    Outlet getOutlet()
+    void setOutlet(Outlet outlet)
+    double getMinConsumption()
+    double getMaxConsumption()
+}
+
+@enduml
