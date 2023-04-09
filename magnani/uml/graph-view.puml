@@ -1,0 +1,11 @@
+@startuml graph-view
+
+interface HistoricalDataController<T>
+
+interface GraphView<T> {
+    + updateGraph(historyData: Set<HistoryData<T>>)
+}
+
+HistoricalDataController -> GraphView: updates
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml graph-model
+
+class HistoryData<T> <<Record>> <<(R, red)>> {
+    + dateTime: LocalDateTime
+    + data: T
+}
+
+interface HistoricalDataLogger<T> {
+    + logData(HistoryData<T> historyData);
+    + getHistory(): Set<HistoryData<T>> 
+}
+
+class HistoricalDataLoggerImpl<T> implements HistoricalDataLogger {}
+
+HistoricalDataLogger --* HistoryData
+
+@enduml

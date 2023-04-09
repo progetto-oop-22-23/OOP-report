@@ -1,0 +1,23 @@
+@startuml scheduler-controller
+
+' left to right direction
+
+' controller
+
+interface TemperatureCommands {
+	+ Command heatCommand()
+	+ Command stopCommand()
+	+ Command coolCommand()
+}
+
+interface TimeSchedulerController<T extends Comparable<T>> extends DiscreteObject {
+	+ addSchedule(timeBounds: Bounds<Integer>, paramBounds: Bounds<T>)
+	+ removeSchedule(ScheduleId)
+	+ setView(TimeSchedulerView<T>)
+}
+
+class TemperatureSchedulerController<Temperature> implements TimeSchedulerController {}
+
+TemperatureSchedulerController --* TemperatureCommands
+
+@enduml

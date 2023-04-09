@@ -1,0 +1,23 @@
+@startuml temperaturecommand
+
+interface Command {
+    + execute(Controller)
+}
+
+interface TemperatureCommands {
+	+ Command heatCommand()
+	+ Command stopCommand()
+	+ Command coolCommand()
+}
+
+class TemperatureCommandsImpl implements TemperatureCommands {}
+
+class TemperatureCommand implements Command {
+    + TemperatureCommand(heating: Function<DeviceState, Double>, cooling: Function<DeviceState, Double>)
+    + execute(Controller)
+    - setState(Controller, deviceType, deviceFunction: Function<DeviceState, Double>)
+}
+
+TemperatureCommandsImpl -> TemperatureCommand: uses
+
+@enduml

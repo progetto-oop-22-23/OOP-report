@@ -1,0 +1,34 @@
+@startuml scheduler-model
+
+' left to right direction
+
+' common
+
+class TimeSchedule<T> << Record >> << (R, red) >> {
+	+ timeRange: Bounds<LocalTime>
+	+ paramRange: Bounds<T>
+}
+
+' model
+
+interface TimeScheduler<T> {}
+class TimeSchedulerImpl<T> implements TimeScheduler {}
+
+enum ParameterResult <<Enum>> {
+	BELOW_BOUNDS
+	IN_BOUNDS
+	ABOVE_BOUNDS
+	NOT_FOUND
+}
+
+interface TimeScheduler<T extends Comparable<T>> {
+	+ addSchedule(timeBounds: Bounds<LocalTime>, paramBounds: Bounds<T>)
+	+ removeSchedule(ScheduleId)
+	+ getSchedules(): Map<ScheduleId, TimeSchedule<T>>
+	+ checkSchedule(currentTime: LocalTime, currentParameter: T): ParameterResult
+}
+
+TimeScheduler --* TimeSchedule
+TimeScheduler --* ParameterResult
+
+@enduml

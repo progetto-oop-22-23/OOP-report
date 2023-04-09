@@ -1,0 +1,14 @@
+@startuml graph-controller
+
+interface HistoricalDataController<T> extends DiscreteObject {}
+
+abstract class AbstractLogger<T> implements HistoricalDataController {
+    # AbstractLogger(view: GraphView<T>, dataSupplier: Supplier<Optional<HistoryData<T>>>)
+    + updateTick(Duration)
+}
+
+class AirQualityLogger extends AbstractLogger {}
+class ConsumptionLogger extends AbstractLogger {}
+class TemperatureLogger extends AbstractLogger {}
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml scheduler-view
+
+' left to right direction
+
+' common
+
+class TimeSchedule<T> << Record >> << (R, red) >> {
+	+ timeRange: Bounds<LocalTime>
+	+ paramRange: Bounds<T>
+}
+
+' view
+
+interface TimeSchedulerController<T extends Comparable<T>> {
+	+ addSchedule(timeBounds: Bounds<Integer>, paramBounds: Bounds<T>)
+	+ removeSchedule(ScheduleId)
+	+ setView(TimeSchedulerView<T>)
+}
+
+interface TimeSchedulerView<T extends Comparable<T>> {
+	+ updateSchedules(Map<ScheduleId, TimeSchedule<T>> schedules)
+}
+
+TimeSchedulerController -- TimeSchedulerView: interaction
+TimeSchedulerView --* TimeSchedule
+
+@enduml

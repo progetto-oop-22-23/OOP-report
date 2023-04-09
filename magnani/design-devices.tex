@@ -70,7 +70,7 @@ which also allows to check the correct order of the bounds internally.
 
 \paragraph{Problem} Reuse of code for the different devices.
 \paragraph{Solution} Create the concept of \texttt{ActuatedDevice}. Then, create an \texttt{AbstractActuatedDevice}
-which wraps an \texttt{Actuator} (\texttt{Decorator} pattern).
+which wraps an \texttt{Actuator}.
 It is then possible to create several different implementations and choose which actuator implementation to use,
 without having to create other device implementations that would be practically identical.
 

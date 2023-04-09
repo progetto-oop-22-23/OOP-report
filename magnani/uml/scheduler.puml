@@ -2,28 +2,24 @@
 
 ' left to right direction
 
-
-class TimeSchedule<T> << Record >> << (R, red) >> {
-	+ timeRange: Bounds<LocalTime>
-	+ paramRange: Bounds<T>
+interface TimeScheduler<T extends Comparable<T>> {
+	+ addSchedule(timeBounds: Bounds<LocalTime>, paramBounds: Bounds<T>)
+	+ removeSchedule(ScheduleId)
+	+ getSchedules(): Map<ScheduleId, TimeSchedule<T>>
+	+ checkSchedule(currentTime: LocalTime, currentParameter: T): ParameterResult
 }
 
-interface TimeScheduler<T> {}
-class TimeSchedulerImpl<T> implements TimeScheduler {}
-
-interface TemperatureCommands {
-	+ Command doHeat()
-	+ Command stopAll()
-	+ Command doCool()
+interface TimeSchedulerController<T extends Comparable<T>> {
+	+ addSchedule(timeBounds: Bounds<Integer>, paramBounds: Bounds<T>)
+	+ removeSchedule(ScheduleId)
+	+ setView(TimeSchedulerView<T>)
 }
 
-interface SchedulerController<T> {
-
+interface TimeSchedulerView<T extends Comparable<T>> {
+	+ updateSchedules(Map<ScheduleId, TimeSchedule<T>> schedules)
 }
 
-class TemperatureScheduler<Temperature> implements SchedulerController {
-	+ TemperatureScheduler(TemperatureCommands)
-}
-
+TimeSchedulerController -- TimeScheduler
+TimeSchedulerController -- TimeSchedulerView
 
 @enduml
