@@ -1,0 +1,27 @@
+@startuml
+
+interface DeviceViewer {
+    + void updateDeviceState(DeviceId deviceId, DeviceState deviceState)
+
+    + void removeDevice(deviceId deviceId)
+
+    + void start(Controller controller)
+}
+
+interface ViewManager extends DeviceViewer {
+    + addView(DeviceViewer view) 
+}
+
+interface Logger implements DeviceViewer {
+
+}
+
+interface JFXDeviceViewer implements DeviceViewer {
+
+}
+
+class ViewManagerImpl implements ViewManager {
+    
+}
+
+@enduml
