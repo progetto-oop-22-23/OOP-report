@@ -1,7 +1,7 @@
 @startuml PoweredDevice
 interface PoweredDevice {
-    double getIstantConsumption()
-    void setIstantConsumption(double istantConsumption)
+    double getinstantConsumption()
+    void setinstantConsumption(double instantConsumption)
     void plug(Outlet outlet)
     PoweredDeviceInfo getPowerInfo()
 }
