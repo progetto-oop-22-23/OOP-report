@@ -1,5 +1,5 @@
 @startuml ElectricalMeterSimple
-class ElectricalMeter
+interface ElectricalMeter
 class Outlet
 interface PoweredDevice
 
