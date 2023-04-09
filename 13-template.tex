@@ -116,6 +116,7 @@ and we decided to opt for string representations instead of enums to allow for f
 
 \input{ceccacci/design.tex}
 \input{magnani/design.tex}
+\input{monticelli/design.tex}
 
 \chapter{Development}
 \section{Automated testing}
@@ -129,12 +130,15 @@ Tested classes:
 	\item Temperature
 	\item DurationConverter
 	\item Outlets
+	\item ElectricalMeter
+	\item Light
 	\item temperaturechangers
 	\item Logger
 \end{itemize}
 
 \input{ceccacci/testing.tex}
 \input{magnani/testing.tex}
+\input{monticelli/testing.tex}
 
 \section{Workflow}
 The first step in our process was domain analysis, and then the insights gained were applied by modeling 
@@ -146,11 +150,13 @@ Group meetings were only needed to discuss refactors.
 
 \input{ceccacci/workflow.tex}
 \input{magnani/workflow.tex}
+\input{monticelli/workflow.tex}
 
 \section{Development Notes}
 
 \input{ceccacci/devnotes.tex}
 \input{magnani/devnotes.tex}
+\input{monticelli/devnotes.tex}
 
 \chapter{Final comments}
 
@@ -158,6 +164,7 @@ Group meetings were only needed to discuss refactors.
 
 \input{ceccacci/selfeval.tex}
 \input{magnani/selfeval.tex}
+\input{monticelli/selfeval.tex}
 
 \appendix
 \chapter{User guide}
@@ -180,7 +187,7 @@ In the GRAPHS tab, the user can visualize temperature, global consumption, and a
 In order to visualize temperature and air quality parameters, either a thermometer or an air quality sensor, respectively, should be connected.
 
 The electrical meter view is relatively basic, consisting of a table with two columns. \newline
-The first column indicates the name of the outlet, while the second column displays its state (i.e., the power absorption in watt-hours). \newline
+The first column indicates the name of the Outlet, while the second column displays its State (i.e., the power absorption in watt-hours). \newline
 At the bottom of the table, there are two buttons: one to add a new outlet and another to remove the most recently added outlet 
 (the adding and removal process is organized in a LIFO structure). \newline
 Additionally, the state column can be sorted in either ascending or descending order by clicking on the column heading.
@@ -189,6 +196,7 @@ Additionally, the state column can be sorted in either ascending or descending o
 \chapter{Lab Assignments}
 
 \input{magnani/lab.tex}
+\input{monticelli/lab.tex}
 
 \bibliographystyle{alpha}
 \bibliography{13-template}
