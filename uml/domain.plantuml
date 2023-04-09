@@ -9,13 +9,6 @@ interface Device {
     + getState(): DeviceState
 }
 
-interface AdjustableDevice extends Device {
-    + setState(DeviceState)
-}
-interface ToggleableDevice extends Device {
-    + toggle()
-}
-
 Controller -- DeviceManager
 DeviceState -- Device
 Device -- DeviceManager

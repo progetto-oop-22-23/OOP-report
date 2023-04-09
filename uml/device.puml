@@ -1,0 +1,14 @@
+@startuml device
+
+interface Device<S extends DeviceState> {
+    + getState(): S
+}
+
+interface AdjustableDevice<S extends DeviceState> extends Device {
+    + setState(DeviceState)
+}
+interface ToggleableDevice<S extends DeviceState> extends Device {
+    + toggle()
+}
+
+@enduml

@@ -100,6 +100,15 @@ When a view commands a state update, the controller processes the change and sen
 \label{uml:architecture}
 \end{figure}
 
+The devices are distinguished between read-only, adjustable and toggleable.
+
+\begin{figure}[H]
+\centering{}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{uml/device.png}
+\caption{UML diagram of the device architecture}
+\label{uml:device}
+\end{figure}
+
 \section{Detailed Design}
 Problem: Sending updates from the view to the controller. 
 We need a common way for all the UI components to send the same kind of updates to the controller without repeating code.
