@@ -25,14 +25,17 @@ and implements the methods for retreiving User input and updating the View.
 \end{figure}
 
 \subsubsection{Outlets}
-As explained in the previous section, one of the functionalities of HOMER is the control over electrical equipement. To achieve this I built the Outlet class.
-The Outlet class has been modeled as an AdjustableDevice.
-The Outlet state is represented by the OutletState class, which stores the consumed power over time calculated in Watt-hours (Wh) from the device plugged into the Outlet, along with the minimum and the maximum value for the consumption.
-The Outlet has no "knowledge" wether there's a plugged Device or not, I thought it was better to keep it this way, and let the device set its own power consumption and send it to the Outlet, virtually asking for power when it needs it, emulating a real-case scenario, 
-which was my ultimate goal.
-To standardize the use of Outlets I decided to impement the Factory pattern, giving 2 standard options for the creation of Outlets: C-type Outlets (also known as Schucko), with a maximum power absorption of 3.5Kw, 
-and L-type Outlets (the standard italian outlet), with a maximum power absorption of 2kW.
+As mentioned earlier, one of the key features of HOMER is the ability to control electrical equipment. \newline
+To accomplish this, I created the Outlet class, which is modeled as an AdjustableDevice. \newline
+The Outlet's state is represented by the OutletState class, which tracks the consumed power over time in Watt-hours (Wh) 
+from any device that is plugged into the Outlet. Additionally, OutletState stores the minimum and maximum power consumption 
+values for the device. \newline
 
+To maintain a realistic simulation, the Outlet class does not have knowledge of whether a device is plugged in or not. 
+Instead, I designed the Outlet to let devices set their own power consumption and send that information to the Outlet when needed. 
+To facilitate standardization of Outlets, I implemented the Factory pattern, which provides two standard options for creating Outlets:
+C-type Outlets (also known as Schuko), with a maximum power absorption of 3.5 kW, and L-type Outlets (the standard Italian outlet),
+with a maximum power absorption of 2 kW.
 \begin{figure}[H]
     \centering{}
     \includegraphics{uml/Outlet.png}
@@ -40,9 +43,10 @@ and L-type Outlets (the standard italian outlet), with a maximum power absorptio
     \label{monticelli:uml:outlet}
 \end{figure}
 \subsubsection*{Powered Devices}
-I needed to model devices that could consume power, so I built the PoweredDevice and PoweredDeviceInfo interfaces.
-PoweredDevice contains the needed methods to control the Device's consumption, retreive the PoweredDeviceInfo associated with it, and set a new Outlet for the PoweredDevice.
-PoweredDeviceInfo exposes methods to retreive the Outlet the device is plugged into, along with minimum and maximum consumption of the PoweredDevice.
+In order to model power-consuming devices, I created the PoweredDevice and PoweredDeviceInfo interfaces.\newline
+The PoweredDevice interface includes methods for controlling the device's power consumption, retrieving the corresponding PoweredDeviceInfo object, 
+and setting a new outlet for the device. Meanwhile, the PoweredDeviceInfo interface provides methods for retrieving the outlet that the device is plugged into, 
+as well as the minimum and maximum power consumption values for the device.
 
 \begin{figure}[H]
     \centering{}
@@ -51,7 +55,7 @@ PoweredDeviceInfo exposes methods to retreive the Outlet the device is plugged i
     \label{monticelli:uml:poweredDevice}
 \end{figure}
 \subsubsection*{Lights}
-The Light class represent a very basic implementation of a ToggleableDevice and a PoweredDevice, its state is hold in the LightState class, which has methods to retreive the state of the Light (ON/OFF).
+The Light class represent a very basic implementation of a ToggleableDevice and a PoweredDevice, its state is held in the LightState class, which has methods to retreive the state of the Light (ON/OFF).
 
 \begin{figure}[H]
     \centering{}
